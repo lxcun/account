@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.accounting.mapper.TransactionMapper">
+    
+    <resultMap id="TransactionResultMap" type="com.accounting.entity.TransactionRecord">
+        <id property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="amount" column="amount"/>
+        <result property="category" column="category"/>
+        <result property="description" column="description"/>
+        <result property="transactionDate" column="transaction_date"/>
+        <result property="assetId" column="asset_id"/>
+        <result property="liabilityId" column="liability_id"/>
+        <result property="accountChangeType" column="account_change_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="com.accounting.entity.TransactionRecord" 
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO transaction_record (type, amount, category, description, transaction_date, 
+                                       asset_id, liability_id, account_change_type)
+        VALUES (#{type}, #{amount}, #{category}, #{description}, #{transactionDate},
+                #{assetId}, #{liabilityId}, #{accountChangeType})
+    </insert>
+    
+    <update id="update" parameterType="com.accounting.entity.TransactionRecord">
+        UPDATE transaction_record
+        SET type = #{type},
+            amount = #{amount},
+            category = #{category},
+            description = #{description},
+            transaction_date = #{transactionDate},
+            asset_id = #{assetId},
+            liability_id = #{liabilityId},
+            account_change_type = #{accountChangeType}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM transaction_record WHERE id = #{id}
+    </delete>
+    
+    <select id="selectById" parameterType="long" resultMap="TransactionResultMap">
+        SELECT * FROM transaction_record WHERE id = #{id}
+    </select>
+    
+    <select id="selectAll" resultMap="TransactionResultMap">
+        SELECT * FROM transaction_record ORDER BY transaction_date DESC
+    </select>
+    
+    <select id="selectByDateRange" resultMap="TransactionResultMap">
+        SELECT * FROM transaction_record
+        WHERE transaction_date BETWEEN #{startDate} AND #{endDate}
+        ORDER BY transaction_date DESC
+    </select>
+    
+    <select id="sumByTypeAndDateRange" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(amount), 0)
+        FROM transaction_record
+        WHERE type = #{type}
+        AND transaction_date BETWEEN #{startDate} AND #{endDate}
+    </select>
+    
+</mapper>

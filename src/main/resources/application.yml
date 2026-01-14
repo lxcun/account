@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: accounting-app
+  datasource:
+    url: jdbc:mysql://localhost:3306/accounting_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.accounting.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.accounting: debug
+
+jwt:
+  secret: mySecretKey123456789012345678901234567890
+  expiration: 86400000

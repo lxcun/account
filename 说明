@@ -1,0 +1,26 @@
+/Users/cora/CodeBuddy/20260109091757
+
+
+mvn spring-boot:run
+
+
+cd frontend
+npm install
+npm run dev
+
+
+前端运行在 http://localhost:5173/
+
+访问 http://localhost:5173/即可使用系统！
+
+主要特性
+✅ RESTful API - 标准的增删改查接口
+✅ 数据验证 - 使用 Jakarta Validation
+✅ 跨域支持 - CORS 配置
+✅ 统一响应 - Result 包装类
+✅ 日期时间处理 - LocalDateTime + Day.js
+✅ 类型安全 - TypeScript 类型定义
+✅ 现代化构建 - Vite 快速开发
+✅ 组件化开发 - React Hooks + Ant Design
+
+项目已完全可运行，所有依赖配置完整，可直接启动使用！

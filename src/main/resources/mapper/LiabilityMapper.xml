@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accounting.mapper.LiabilityMapper">
+
+    <resultMap id="BaseResultMap" type="com.accounting.entity.Liability">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="balance" property="balance"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.accounting.entity.Liability" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO liability (name, type, balance, description)
+        VALUES (#{name}, #{type}, #{balance}, #{description})
+    </insert>
+
+    <update id="update" parameterType="com.accounting.entity.Liability">
+        UPDATE liability
+        SET name = #{name},
+            type = #{type},
+            balance = #{balance},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM liability WHERE id = #{id}
+    </delete>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT * FROM liability WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM liability ORDER BY create_time DESC
+    </select>
+
+    <select id="sumBalance" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(balance), 0) FROM liability
+    </select>
+
+    <update id="updateBalance">
+        UPDATE liability SET balance = #{balance} WHERE id = #{id}
+    </update>
+
+</mapper>
