@@ -16,14 +16,16 @@
         <result property="accountChangeType" column="account_change_type"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
     </resultMap>
     
     <insert id="insert" parameterType="com.accounting.entity.TransactionRecord" 
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO transaction_record (type, amount, category, description, transaction_date, 
-                                       asset_id, liability_id, account_change_type)
+                                       asset_id, liability_id, account_change_type, create_by, update_by)
         VALUES (#{type}, #{amount}, #{category}, #{description}, #{transactionDate},
-                #{assetId}, #{liabilityId}, #{accountChangeType})
+                #{assetId}, #{liabilityId}, #{accountChangeType}, #{createBy}, #{updateBy})
     </insert>
     
     <update id="update" parameterType="com.accounting.entity.TransactionRecord">
@@ -35,7 +37,8 @@
             transaction_date = #{transactionDate},
             asset_id = #{assetId},
             liability_id = #{liabilityId},
-            account_change_type = #{accountChangeType}
+            account_change_type = #{accountChangeType},
+            update_by = #{updateBy}
         WHERE id = #{id}
     </update>
     

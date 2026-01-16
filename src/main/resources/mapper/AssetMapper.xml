@@ -11,11 +11,13 @@
         <result column="description" property="description"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.accounting.entity.Asset" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO asset (name, type, balance, description)
-        VALUES (#{name}, #{type}, #{balance}, #{description})
+        INSERT INTO asset (name, type, balance, description, create_by, update_by)
+        VALUES (#{name}, #{type}, #{balance}, #{description}, #{createBy}, #{updateBy})
     </insert>
 
     <update id="update" parameterType="com.accounting.entity.Asset">
@@ -23,7 +25,8 @@
         SET name = #{name},
             type = #{type},
             balance = #{balance},
-            description = #{description}
+            description = #{description},
+            update_by = #{updateBy}
         WHERE id = #{id}
     </update>
 
