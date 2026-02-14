@@ -46,3 +46,17 @@ logs/
 
 # Application
 application-local.yml
+/.claude/
+/.codebuddy/
+/.feisuan/
+/.idea/
+/.iflow/
+/.vscode/
+/.workflow/
+/.claude/
+/.codebuddy/
+/.feisuan/
+/.idea/
+/.iflow/
+/.vscode/
+/.workflow/
